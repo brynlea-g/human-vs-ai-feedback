@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>AI versus Human Feedback · Study 2 · Brynlea Gibson</title>
+<meta name="description" content="How perceived and actual feedback source shape students' ratings of feedback. A companion page to the Psychonomics 2026 poster.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#3F1467; --purple-2:#5B2A86; --magenta:#D6337F; --pink:#FD9CBC;
+    --lav:#9B7BC0; --tint:#F4EEF9; --tint-2:#EBE2F4; --line:#E6E2EA;
+    --ink:#1F1A24; --ink-2:#55505C; --muted:#7A7482; --white:#fff;
+    --radius:18px; --shadow:0 1px 2px rgba(31,26,36,.06),0 8px 24px rgba(63,20,103,.08);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:"Titillium Web",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+       color:var(--ink);background:var(--purple);font-size:17px;line-height:1.55}
+  a{color:var(--magenta)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px}
+  /* hero */
+  header.hero{color:#fff;padding:44px 0 34px}
+  .eyebrow{display:inline-block;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+  .hero h1{font-size:clamp(28px,6.4vw,42px);line-height:1.12;margin:12px 0 14px;font-weight:700}
+  .hero .by{color:#E6DAF2;font-size:16px;margin:0 0 22px}
+  .hero .lead{font-size:clamp(18px,4.2vw,21px);line-height:1.45;margin:0 0 26px;color:#fff}
+  .hero .lead em{font-style:normal;color:var(--pink);font-weight:600}
+  .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 26px}
+  .chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:12px 12px 10px}
+  .chip b{display:block;font-size:clamp(22px,6vw,30px);line-height:1;font-weight:700}
+  .chip span{display:block;font-size:13px;color:#E6DAF2;margin-top:6px;line-height:1.25}
+  nav.jump{display:flex;gap:8px;flex-wrap:wrap}
+  nav.jump a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:8px 14px;border-radius:999px;
+             border:1px solid rgba(255,255,255,.3)}
+  nav.jump a:hover{background:rgba(255,255,255,.12)}
+  /* cards */
+  main{padding-bottom:30px}
+  section.card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 22px;margin:0 0 18px}
+  .kicker{display:flex;align-items:center;gap:12px;margin:0 0 8px}
+  .badge{flex:none;width:36px;height:36px;border-radius:50%;background:var(--purple);color:#fff;
+         display:grid;place-items:center;font-weight:700;font-size:17px}
+  .kicker .lbl{font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta)}
+  h2{font-size:clamp(24px,5.4vw,30px);line-height:1.15;color:var(--purple);margin:4px 0 12px;font-weight:700}
+  h2 .hl{color:var(--magenta)}
+  h3{font-size:19px;color:var(--purple);margin:22px 0 8px;font-weight:700}
+  p{margin:0 0 12px}
+  .muted{color:var(--ink-2)}
+  .small{font-size:14.5px}
+  .take{background:var(--tint);border-radius:14px;padding:14px 16px;margin:16px 0 4px}
+  .take b{color:var(--magenta)}
+  .caveat{border:1px dashed #CDBFDD;border-radius:14px;padding:12px 14px;margin:14px 0 0;font-size:15px;color:var(--ink-2)}
+  .caveat strong{color:var(--purple)}
+  /* steps */
+  ol.steps{list-style:none;margin:16px 0 0;padding:0;counter-reset:s}
+  ol.steps li{position:relative;padding:0 0 16px 50px;counter-increment:s}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;
+    background:var(--tint-2);color:var(--purple);font-weight:700;display:grid;place-items:center}
+  ol.steps li:not(:last-child)::after{content:"";position:absolute;left:16px;top:38px;bottom:4px;width:2px;background:var(--tint-2)}
+  ol.steps b{color:var(--purple);display:block;font-size:17.5px}
+  ol.steps span{color:var(--ink-2);font-size:15.5px}
+  /* topics */
+  details.topic{border:1px solid var(--line);border-radius:14px;margin:10px 0;background:#fff}
+  details.topic summary{list-style:none;cursor:pointer;padding:14px 46px 14px 16px;position:relative;font-weight:700;color:var(--purple)}
+  details.topic summary::-webkit-details-marker{display:none}
+  details.topic summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);
+    width:24px;height:24px;border-radius:50%;background:var(--tint);color:var(--purple);display:grid;place-items:center;font-weight:700}
+  details[open].topic summary::after{content:"−"}
+  details.topic .body{padding:0 16px 16px}
+  .course{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.06em;color:var(--ink-2);background:var(--tint);
+    border-radius:999px;padding:2px 10px;margin-left:6px;vertical-align:2px}
+  blockquote.q{margin:0;padding:12px 14px;background:var(--tint);border-radius:12px;font-size:16px}
+  .pending{color:var(--magenta);font-weight:600}
+  /* spot the AI */
+  .spot{margin-top:14px}
+  .seg{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+  .seg button{font:inherit;font-size:14.5px;font-weight:600;border:1px solid var(--line);background:#fff;color:var(--purple);
+    border-radius:999px;padding:6px 12px;cursor:pointer}
+  .seg button[aria-pressed="true"]{background:var(--purple);color:#fff;border-color:var(--purple)}
+  .fb{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:10px 0;font-size:15.5px;background:#fff}
+  .fb .tag{font-weight:700;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px;display:flex;justify-content:space-between;gap:8px}
+  .fb .reveal{display:none;color:#fff;border-radius:999px;padding:1px 10px;letter-spacing:.06em}
+  .fb.shown .reveal{display:inline-block}
+  .fb .txt{white-space:pre-line}
+  .weak{background:var(--tint);border-radius:14px;padding:14px 16px;font-size:15.5px;margin:10px 0}
+  .weak .txt{white-space:pre-line}
+  .guess{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
+  .btn{font:inherit;font-weight:700;font-size:15px;border:0;border-radius:999px;padding:10px 16px;cursor:pointer}
+  .btn.p{background:var(--purple);color:#fff}
+  .btn.o{background:#fff;color:var(--purple);border:1.5px solid var(--purple)}
+  .result{margin-top:10px;font-weight:600}
+
+  /* participant demo */
+  .screen{position:relative;padding:0 0 22px 18px;margin-left:6px;border-left:2px solid var(--tint-2)}
+  .screen.last{border-left-color:transparent}
+  .screen::before{content:"";position:absolute;left:-8px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--magenta);border:3px solid #fff;box-shadow:0 0 0 2px var(--tint-2)}
+  .scr-h{font-weight:700;color:var(--purple);font-size:18px;margin:0 0 10px;line-height:1.3}
+  .scr-n{display:block;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--magenta)}
+  .mini{display:block;font-weight:700;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:4px}
+  .qbox{background:var(--tint);border-radius:12px;padding:12px 14px;font-size:15.5px}
+  .qbox p{margin:0}
+  .abox{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px;font-size:15.5px;position:relative}
+  .abox .paras p{margin:0 0 10px}
+  .abox.clamp .paras{max-height:9.5em;overflow:hidden}
+  .abox.clamp::after{content:"";position:absolute;left:1px;right:1px;bottom:1px;height:56px;border-radius:0 0 12px 12px;background:linear-gradient(rgba(255,255,255,0),#fff)}
+  .linkbtn{font:inherit;font-weight:700;color:var(--magenta);background:none;border:0;padding:8px 0 0;cursor:pointer}
+  .tabs{display:flex;gap:6px;background:var(--tint);padding:4px;border-radius:999px;margin-bottom:10px}
+  .tabs button{flex:1;font:inherit;font-weight:700;font-size:15px;border:0;border-radius:999px;padding:8px 10px;background:transparent;color:var(--purple);cursor:pointer}
+  .tabs button[aria-selected="true"]{background:var(--purple);color:#fff}
+  .fbp .crit{margin:0 0 10px}
+  .fbp .crit b{display:block;color:var(--purple);font-size:15px}
+  .fbp .crit p{margin:2px 0 0;font-size:15px;color:var(--ink)}
+  .fbp ol{margin:4px 0 0;padding-left:20px;font-size:15px}
+  .fbp ol li{margin:0 0 4px}
+  .fbp .sum{background:var(--tint);border-radius:12px;padding:10px 12px;margin-top:10px;font-size:15px}
+  .fbp .who{display:none;margin-bottom:10px;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;border-radius:999px;padding:3px 12px;width:max-content}
+  .fbp.revealed .who{display:block}
+  .fbwrap{position:relative}
+  .fbwrap.clamp{max-height:330px;overflow:hidden}
+  .fbwrap.clamp::after{content:"";position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(rgba(255,255,255,0),#fff)}
+  .fake-input{margin-top:10px;border:1.5px dashed #CDBFDD;border-radius:12px;padding:14px;color:var(--muted);font-size:15px;min-height:84px}
+  .sl{margin:12px 0 4px}
+  .sl label{display:block;font-weight:700;font-size:15.5px;color:var(--ink);margin-bottom:2px}
+  .sl .ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);gap:10px}
+  .sl .row{display:flex;align-items:center;gap:12px}
+  .sl output{flex:none;width:36px;text-align:right;font-weight:700;color:var(--purple);font-variant-numeric:tabular-nums}
+  .sl input[type=range]{flex:1;accent-color:var(--purple);height:30px}
+  .sl.group-gap{margin-top:20px;padding-top:12px;border-top:1px solid var(--line)}
+  .opts{display:grid;gap:8px}
+  .opt{font:inherit;font-size:15.5px;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--ink)}
+  .opt:hover{border-color:var(--lav)}
+  .opt[aria-pressed="true"]{border-color:var(--purple);background:var(--tint)}
+  /* stats */
+  .hero-num{display:flex;align-items:flex-end;gap:12px;margin:8px 0 6px}
+  .hero-num b{font-size:clamp(54px,15vw,76px);line-height:.9;color:var(--purple);font-weight:700;letter-spacing:-.01em}
+  .hero-num span{font-weight:600;color:var(--ink);padding-bottom:6px;line-height:1.25}
+  .stack{display:flex;height:22px;border-radius:6px;overflow:hidden;gap:2px;margin:14px 0 8px;background:#fff}
+  .stack i{display:block;height:100%}
+  .legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px;font-size:15px}
+  .legend div{display:flex;align-items:center;gap:8px}
+  .legend s{flex:none;width:12px;height:12px;border-radius:3px;text-decoration:none}
+  .legend b{margin-left:auto;font-variant-numeric:tabular-nums}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 4px}
+  .trio div{background:var(--tint);border-radius:12px;padding:12px;text-align:left}
+  .trio b{display:block;font-size:28px;line-height:1;color:var(--purple)}
+  .trio span{display:block;font-size:13.5px;color:var(--ink-2);margin-top:6px;line-height:1.25}
+  /* forest chart */
+  .chart{position:relative;margin:10px 0 2px}
+  .chart svg{display:block;width:100%;height:auto;overflow:visible}
+  .chart .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:13.5px;line-height:1.35;
+    padding:8px 10px;border-radius:8px;opacity:0;transform:translate(-50%,-110%);transition:opacity .12s;white-space:nowrap;z-index:2}
+  .chart .tip.on{opacity:1}
+  .chart-note{font-size:13.5px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:4px}
+  /* paradox */
+  .paradox{background:#4E1C7E;border:2px solid var(--pink);color:#fff;border-radius:var(--radius);padding:24px 22px;margin:0 0 18px;box-shadow:var(--shadow)}
+  .paradox .lbl{color:var(--pink);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  .paradox p{font-size:clamp(20px,4.8vw,24px);line-height:1.3;font-weight:700;margin:8px 0 0}
+  /* more detail */
+  details.more{margin-top:16px;border-radius:14px;background:var(--tint)}
+  details.more summary{cursor:pointer;list-style:none;padding:13px 16px;font-weight:700;color:var(--purple)}
+  details.more summary::-webkit-details-marker{display:none}
+  details.more summary::before{content:"▸ ";color:var(--magenta)}
+  details[open].more summary::before{content:"▾ "}
+  details.more .body{padding:0 16px 14px;font-size:15px}
+  .tbl{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums;margin:6px 0 12px;background:#fff;border-radius:10px;overflow:hidden}
+  .tbl th,.tbl td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--line)}
+  .tbl th:first-child,.tbl td:first-child{text-align:left}
+  .tbl th{font-size:12.5px;color:var(--ink-2);font-weight:700;letter-spacing:.03em;background:#FBF9FD}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  /* coming next */
+  .status{display:inline-block;background:var(--magenta);color:#fff;font-weight:700;font-size:12.5px;letter-spacing:.12em;
+    text-transform:uppercase;border-radius:999px;padding:3px 12px;margin-bottom:6px}
+  ul.tidy{margin:8px 0 0;padding-left:20px}
+  ul.tidy li{margin:0 0 8px}
+  ul.tidy li::marker{color:var(--magenta)}
+  .refs{font-size:14.5px;color:var(--ink-2)}
+  .refs p{padding-left:22px;text-indent:-22px;margin:0 0 8px}
+  /* footer */
+  footer{color:#fff;padding:10px 0 46px}
+  .contact{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:22px}
+  .contact .lbl{color:var(--pink);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  .contact h4{font-size:24px;margin:6px 0 2px}
+  .contact p{color:#E6DAF2;margin:0 0 4px}
+  .contact a{color:#fff;font-weight:600}
+  .mail{display:inline-block;margin-top:12px;background:#fff;color:var(--purple)!important;text-decoration:none;border-radius:999px;padding:10px 18px;font-weight:700}
+  .fine{font-size:13px;color:#CFC0E2;margin-top:18px}
+  @media (max-width:420px){
+    section.card{padding:22px 16px}
+    .chips{gap:8px}.chip{padding:10px 9px 8px}
+    .legend{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Psychonomics 2026 · Study 2</span>
+    <h1>AI versus Human Feedback: How Perceived and Actual Source Shapes Student Preferences and Learning Outcomes.</h1>
+    <p class="by">Brynlea Gibson &amp; Jason Tangen · School of Psychology, The University of Queensland</p>
+    <p class="lead">Students struggled to tell AI feedback from human feedback. They rated the feedback they <em>judged</em> to be human more highly, yet the feedback <em>actually</em> written by AI scored higher.</p>
+    <div class="chips">
+      <div class="chip"><b>160</b><span>undergraduate students</span></div>
+      <div class="chip"><b>320</b><span>pieces of feedback rated</span></div>
+      <div class="chip"><b>47.8%</b><span>sources correctly identified</span></div>
+    </div>
+    <nav class="jump" aria-label="Jump to section">
+      <a href="#task">The task</a><a href="#try">Try it</a><a href="#findings">Findings</a><a href="#next">Coming next</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card" id="why">
+    <div class="kicker"><span class="lbl">Why this study</span></div>
+    <h2>Does it matter <span class="hl">who</span> wrote the feedback, or who students <span class="hl">think</span> wrote it?</h2>
+    <p>AI systems now write feedback on student work, and students increasingly know it. Past research pulls in two directions: people sometimes distrust algorithms (algorithm aversion) and sometimes prefer them (algorithm appreciation). Studies that reveal the source also find that an "AI" label can lower how students rate the same feedback.</p>
+    <p>We separated two things that usually travel together: the <strong>actual</strong> source of the feedback, and the source students <strong>believed</strong> it came from.</p>
+  </section>
+
+  <section class="card" id="task">
+    <div class="kicker"><span class="lbl">What participants did</span></div>
+    <h2>One hour, two topics, two sources</h2>
+    <p class="muted">160 UQ psychology undergraduates completed the study in the lab. Participants did not write the first answer themselves: they read a weak answer prepared for the study, then improved it.</p>
+    <ol class="steps">
+      <li><b>Read a weak answer</b><span>A short answer to an introductory psychology question, written for the study with a preset mix of grammar, flow and conceptual errors, including a mix-up with a commonly confused concept.</span></li>
+      <li><b>Receive feedback</b><span>Written by a paid UQ course tutor or generated by an AI system (GPT-5.5 or Claude Sonnet 4.6), using the same rubric. The source was never shown.</span></li>
+      <li><b>Rewrite the answer</b><span>Using the feedback, with no time or word limit.</span></li>
+      <li><b>Rate the task and the feedback</b><span>0–100 sliders: confidence and difficulty first, then helpfulness, clarity, tone and style, and memorability and impact in a random order.</span></li>
+      <li><b>Repeat with the other source</b><span>A second topic with feedback from the other source. Source order was counterbalanced and topics were randomised.</span></li>
+      <li><b>Judge the source</b><span>At the end, students learned that each piece of feedback had a 50% chance of coming from a human or AI, then judged each one: AI, human, or not sure.</span></li>
+    </ol>
+
+    <h3>The four questions</h3>
+    <p class="small muted">For each topic, two tutors and two AI models wrote feedback on the same weak answer. Tap a topic to see the question.</p>
+    <div id="topics"></div>
+  </section>
+
+
+  <section class="card" id="try">
+    <div class="kicker"><span class="lbl">See what participants saw</span></div>
+    <h2>Working memory, <span class="hl">screen by screen</span></h2>
+    <p class="muted">Participants saw one piece of feedback per round. Here you can read both a tutor's and an AI's feedback on the same answer, then make the same judgement participants did.</p>
+
+    <div class="screen">
+      <div class="scr-h"><span class="scr-n">Screen 1</span>Read the sample student answer</div>
+      <div class="qbox"><span class="mini">Question</span><p id="wm-q"></p></div>
+      <div class="abox clamp" id="wm-answer"><span class="mini">Answer</span><div class="paras"></div></div>
+      <button class="linkbtn" id="wm-more" aria-expanded="false">Read the full answer</button>
+    </div>
+
+    <div class="screen">
+      <div class="scr-h"><span class="scr-n">Screen 2</span>Read the feedback</div>
+      <p class="small muted" style="margin-bottom:10px">One of these was written by a UQ tutor and one was generated by AI.</p>
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tab-0" aria-selected="true">Feedback A</button>
+        <button role="tab" id="tab-1" aria-selected="false">Feedback B</button>
+      </div>
+      <div class="fbwrap clamp" id="fb-wrap"><div id="fb-panel" class="fbp" role="tabpanel"></div></div>
+      <button class="linkbtn" id="fb-more" aria-expanded="false">Read the full feedback</button>
+    </div>
+
+    <div class="screen">
+      <div class="scr-h"><span class="scr-n">Screen 3</span>Rewrite the answer</div>
+      <div class="qbox"><span class="mini">Your task</span><p>Using the feedback provided, your task is to rewrite a new answer to the same question.</p></div>
+      <div class="fake-input" aria-hidden="true">Participants typed their new answer here, with no time or word limit.</div>
+    </div>
+
+    <div class="screen">
+      <div class="scr-h"><span class="scr-n">Screen 4</span>Rate the task and the feedback</div>
+      <p class="small muted" style="margin-bottom:6px">Try the sliders. Confidence and difficulty always came first; the four feedback ratings appeared in a random order.</p>
+      <div id="sliders"></div>
+    </div>
+
+    <div class="screen last">
+      <div class="scr-h"><span class="scr-n">Screen 5</span>Judge the source</div>
+      <div class="qbox"><span class="mini">Study design information</span><p>In this experiment, participants were shown feedback written by a human marker or feedback generated by artificial intelligence (AI). There was a 50% chance of receiving either type for your responses, and your feedback was randomly assigned.</p></div>
+      <p style="font-weight:700;color:var(--purple);margin:14px 0 8px">In your opinion, was <span id="judge-which">Feedback A</span> generated by AI or written by a human?</p>
+      <div class="opts" id="opts">
+        <button class="opt" data-a="ai">Generated by AI</button>
+        <button class="opt" data-a="human">Written by a human educator</button>
+        <button class="opt" data-a="unsure">I'm not sure / Unable to determine</button>
+      </div>
+      <div class="result" id="judge-result" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <div id="findings"></div>
+
+  <section class="card">
+    <div class="kicker"><span class="badge">1</span><span class="lbl">Spotting the source</span></div>
+    <h2>Students were <span class="hl">not very accurate</span> at identifying feedback sources</h2>
+    <div class="hero-num"><b>47.8%</b><span>of feedback was correctly identified<br><span class="muted small" style="font-weight:400">153 of 320 pieces</span></span></div>
+    <div class="stack" role="img" aria-label="Correct 47.8 percent, incorrect 33.1 percent, unsure 17.5 percent, missing 1.6 percent">
+      <i style="width:47.8%;background:#3F1467"></i><i style="width:33.1%;background:#D6337F"></i><i style="width:17.5%;background:#9B7BC0"></i><i style="width:1.6%;background:#CFC8D8"></i>
+    </div>
+    <div class="legend">
+      <div><s style="background:#3F1467"></s>Correct<b>47.8%</b></div>
+      <div><s style="background:#D6337F"></s>Incorrect<b>33.1%</b></div>
+      <div><s style="background:#9B7BC0"></s>Unsure<b>17.5%</b></div>
+      <div><s style="background:#CFC8D8"></s>Missing<b>1.6%</b></div>
+    </div>
+    <div class="take">Even among confident guesses, only <b>59.1%</b> were right (153 of 259), not far above the 50% you would expect from guessing.</div>
+    <h3>How each student did</h3>
+    <div class="trio">
+      <div><b>66</b><span>identified neither piece</span></div>
+      <div><b>35</b><span>identified one</span></div>
+      <div><b>59</b><span>identified both</span></div>
+    </div>
+    <p class="small muted">"Neither" includes students who answered "unsure".</p>
+    <details class="more">
+      <summary>More detail: actual vs believed source</summary>
+      <div class="body scroll">
+        <table class="tbl">
+          <thead><tr><th>Actual source</th><th>Judged AI</th><th>Judged human</th><th>Unsure</th><th>Missing</th></tr></thead>
+          <tbody>
+            <tr><td>AI</td><td>72</td><td>53</td><td>32</td><td>3</td></tr>
+            <tr><td>Human</td><td>53</td><td>81</td><td>24</td><td>2</td></tr>
+          </tbody>
+        </table>
+        <p class="small">Counts are pieces of feedback. Each student received one piece from each source.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="card">
+    <div class="kicker"><span class="badge">2</span><span class="lbl">Believed source</span></div>
+    <h2>Feedback <span class="hl">believed</span> to be human-written was rated higher than perceived AI</h2>
+    <p class="small muted">Rating difference (human − AI) on a 0–100 scale, with 95% confidence intervals. 259 ratings from the 146 students who gave a definite judgement.</p>
+    <div class="chart" id="chart-believed"></div>
+    <div class="chart-note"><span>● significant &nbsp; ○ not significant (Holm)</span><span>Tap a point for details</span></div>
+    <div class="take">Feedback students thought was human-written scored <b>6 to 7 points higher</b> for clarity, tone and memorability. The helpfulness gap was not significant.</div>
+    <div class="caveat"><strong>Reading this result.</strong> Students reported their source beliefs after both rounds, so this is an association, not a causal effect of belief. It could also run the other way: students may have labelled the feedback they liked as "human".</div>
+  </section>
+
+  <section class="card">
+    <div class="kicker"><span class="badge">3</span><span class="lbl">Actual source</span></div>
+    <h2>But when comparing <span class="hl">actual source</span>, AI-written feedback was rated higher</h2>
+    <p class="small muted">Rating difference (human − AI) on a 0–100 scale, with 95% confidence intervals. 320 ratings from all 160 students.</p>
+    <div class="chart" id="chart-actual"></div>
+    <div class="chart-note"><span>● significant (Holm)</span><span>Tap a point for details</span></div>
+    <div class="take">In our study, AI-written feedback scored <b>6.5 to 12.5 points higher</b> than tutor feedback on every dimension, with the largest gap for helpfulness.</div>
+  </section>
+
+  <div class="paradox">
+    <span class="lbl">The paradox</span>
+    <p>Students rated the feedback they judged to be human more highly, yet the feedback actually written by AI was rated higher.</p>
+  </div>
+
+  <section class="card">
+    <div class="kicker"><span class="lbl">For the stats-curious</span></div>
+    <h2>How we analysed it, and how robust it is</h2>
+    <p>We fitted four linear mixed-effects models, one per rating, with random intercepts for participant and topic. Positive estimates mean human feedback was rated higher. We applied a Holm correction across the four ratings as an analysis choice.</p>
+    <details class="more">
+      <summary>Both effects in one model (exploratory)</summary>
+      <div class="body">
+        <p>Because belief and reality often disagreed, we entered both into the same model. Both effects held on all four ratings, including helpfulness, and both grew slightly. They do not simply cancel each other out.</p>
+        <div class="scroll"><table class="tbl">
+          <thead><tr><th>Rating</th><th>Believed human</th><th>Actually human</th></tr></thead>
+          <tbody>
+            <tr><td>Helpfulness</td><td>+6.3</td><td>−14.3</td></tr>
+            <tr><td>Clarity</td><td>+7.6</td><td>−8.2</td></tr>
+            <tr><td>Tone and style</td><td>+8.0</td><td>−8.8</td></tr>
+            <tr><td>Memorability and impact</td><td>+9.1</td><td>−9.4</td></tr>
+          </tbody>
+        </table></div>
+        <p class="small muted">All Holm-adjusted p &lt; .01. Belief was measured after exposure, so these are adjusted associations, not causal or mediation effects.</p>
+      </div>
+    </details>
+    <details class="more">
+      <summary>Robustness checks</summary>
+      <div class="body">
+        <ul class="tidy">
+          <li><strong>Topic as a fixed effect</strong> (only four topics): estimates barely moved, e.g. believed clarity +6.1, actual helpfulness −12.6.</li>
+          <li><strong>Adding round (first vs second)</strong> to check for practice or fatigue: the same pattern held, with believed helpfulness still not significant.</li>
+          <li><strong>Treating "unsure" as its own category:</strong> feedback judged "unsure" was not rated differently from feedback judged AI (all p &gt; .08).</li>
+        </ul>
+      </div>
+    </details>
+    <details class="more">
+      <summary>Full primary estimates</summary>
+      <div class="body scroll">
+        <table class="tbl">
+          <thead><tr><th>Rating</th><th>Believed (95% CI)</th><th>Actual (95% CI)</th></tr></thead>
+          <tbody id="est-table"></tbody>
+        </table>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" id="next">
+    <span class="status">In progress</span>
+    <h2>Planned analysis: feedback effectiveness and marking performance</h2>
+    <p>Pending ethics approval, GPT and Claude will independently assess participants' initial and revised written explanations using a standardised 20-point rubric, alongside expert human marking of a subset of responses.</p>
+    <p>Performance will be measured as improvement in scores following feedback, allowing us to examine whether feedback attributed to AI versus humans leads to different levels of improvement in conceptual understanding.</p>
+    <p>Linear mixed-effects models will account for repeated responses within participants and variation across psychology topics. Agreement with expert human marks and consistency across repeated LLM assessments will also be examined to evaluate marking reliability.</p>
+    <div class="take">This will extend our findings beyond perceived feedback quality (<b>attitudes</b>) to investigate actual improvements in understanding (<b>performance</b>).</div>
+  </section>
+
+  <section class="card">
+    <div class="kicker"><span class="lbl">Good to know</span></div>
+    <h2>Limits of these results</h2>
+    <ul class="tidy">
+      <li>These are preliminary results, not yet peer reviewed.</li>
+      <li>The AI advantage reflects the feedback texts in this study (two tutors and two AI models per topic), not AI feedback in general.</li>
+      <li>Source beliefs were collected after both rounds, so the believed-source results are associations.</li>
+    </ul>
+    <details class="more">
+      <summary>Key references</summary>
+      <div class="body refs">
+        <p>Dietvorst, B. J., Simmons, J. P., &amp; Massey, C. (2015). Algorithm aversion: People erroneously avoid algorithms after seeing them err. <i>Journal of Experimental Psychology: General, 144</i>(1), 114–126.</p>
+        <p>Er, E., Akçapınar, G., Bayazıt, A., Noroozi, O., &amp; Banihashem, S. K. (2024). Assessing student perceptions and use of instructor versus AI-generated feedback. <i>British Journal of Educational Technology.</i> https://doi.org/10.1111/bjet.13558</p>
+        <p>Logg, J. M., Minson, J. A., &amp; Moore, D. A. (2019). Algorithm appreciation: People prefer algorithmic to human judgment. <i>Organizational Behavior and Human Decision Processes, 151</i>, 90–103.</p>
+        <p>Nazaretsky, T., Mejia-Domenzain, P., Swamy, V., Frej, J., &amp; Käser, T. (2024). AI or human? Evaluating student feedback perceptions in higher education. In <i>EC-TEL 2024</i> (LNCS 15159, pp. 284–298). Springer.</p>
+        <p>Weidlich, J., Gotsch, F., Schudel, K., et al. (2025). Teacher, peer, or AI? Comparing effects of feedback sources in higher education. <i>Computers and Education Open, 9</i>, 100300.</p>
+      </div>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <span class="lbl">Researcher</span>
+      <h4>Brynlea Gibson</h4>
+      <p>PhD candidate, School of Psychology, The University of Queensland</p>
+      <p>With Professor Jason Tangen</p>
+      <a class="mail" href="mailto:brynlea.gibson@uq.edu.au">brynlea.gibson@uq.edu.au</a>
+      <p style="margin-top:14px">Preregistration and materials: <a href="https://osf.io/v3g2z">osf.io/v3g2z</a></p>
+    </div>
+    <p class="fine">Questions about the study are welcome. Please get in touch by email.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- topic questions ---------- */
+const TOPICS = [
+  { name:"Classical conditioning", course:"PSYC2050",
+    q:"What is classical conditioning? Outline Pavlov’s original experiment and provide one real-world example of how it applies to human behaviour. (Max 400 words)" },
+  { name:"Working memory", course:"PSYC2050",
+    q:"What is working memory? Outline one influential model or study that explains its structure, and provide one real-world example of how it operates in everyday cognition. (Max 400 words)" },
+  { name:"Broca’s area", course:"NEUR1020",
+    q:"What is Broca’s area and what role does it play in language? Refer to Broca’s original findings or later research, and provide one real-world example of how damage to this area can affect human behaviour. (Max 400 words)" },
+  { name:"Validity", course:"PSYC1040",
+    q:"What is validity in psychological research? Outline the main types of validity and how they are tested, and provide one real-world example of why validity is important when interpreting psychological findings. (Max 400 words)" }
+];
+const tWrap=document.getElementById('topics');
+TOPICS.forEach(t=>{
+  const d=document.createElement('details'); d.className='topic';
+  d.innerHTML=`<summary>${t.name}<span class="course">${t.course}</span></summary><div class="body"><blockquote class="q"></blockquote></div>`;
+  d.querySelector('.q').textContent = t.q;
+  tWrap.appendChild(d);
+});
+
+/* ---------- working memory materials (as shown to participants) ---------- */
+const WM = {
+  q: TOPICS[1].q,
+  answer: [
+    "Working memory is a type of memory that stores information immediately before it is permanently stored in the brain, like a filing cabinet in the brain. It is where fresh knowledge is placed once it is learned but can still be worked on for a short time. Psychologists think working memory is important because without it we would not have identity, facts, or skills that can change before being stored in long-term memory. For example, when you memorise your childhood phone number or your best friend’s birthday, you are using working memory. Or if you study history and can later recall the dates of wars, that is also working memory because it is permanent. Without working memory, you would not be able to store these things.",
+    "Psychologists have made models of working memory, such as Baddeley and Hitch’s model with the central executive, phonological loop, and visuo-spatial sketchpad. These parts show how information can be temporarily processed and held in different formats, even though they are really just explaining aspects of the permanent memory system. In real life, it is enough to know that working memory is what helps you remember things for a long time.",
+    "Sometimes working memory can fail. People might forget appointments, birthdays, or what they learned in school. This shows that memory is not perfect, but it is still reliable enough. Forgetting things from working memory just shows that even permanent memories can get weaker over time.",
+    "Working memory is not the same as sensory memory, which is very short and disappears quickly. Instead, it is what makes long-term learning possible. It is also different from short-term memory because it lasts longer. Overall, working memory keeps information available and active, making it possible for people to know facts, remember events, and live normal lives. It is the foundation of learning and knowledge, and it explains why people can pass exams or remember family events from many years ago."
+  ],
+  feedback: {
+    ai: {
+      Clarity:"The response is generally readable at sentence level, but the explanation is unclear because key terms are used inconsistently. Phrases such as “permanently stored,” “filing cabinet,” and “fresh knowledge” make working memory sound like long-term storage rather than temporary active processing. Some examples are easy to understand, but they do not clearly illustrate working memory.",
+      Flow:"The response has a recognisable structure: definition, model, examples, and comparison with other memory types. However, the ideas do not progress logically because the same misconception is repeated throughout. The discussion moves between working memory, long-term memory, forgetting, and identity without clearly linking these points back to the question.",
+      Accuracy:"The response correctly identifies Baddeley and Hitch’s model and names the central executive, phonological loop, and visuo-spatial sketchpad. However, it contains major inaccuracies. Working memory is not information stored before becoming permanent, nor is it responsible for childhood phone numbers, facts remembered years later, or permanent learning. It is a limited-capacity system for temporarily holding and manipulating information during tasks.",
+      Depth:"The response shows limited depth. It names parts of the Baddeley and Hitch model but does not explain what the components do or how they interact. The real-world examples mostly describe long-term memory rather than active working memory. A stronger answer would explain, for example, mentally calculating a bill, following directions, or holding a sentence in mind while reading.",
+      improve:["Correct the main misconception: define working memory as temporary active storage and manipulation, not permanent memory storage.","Explain the Baddeley and Hitch components: central executive, phonological loop, visuo-spatial sketchpad, and optionally the episodic buffer.","Use a real working-memory example, such as remembering a phone number long enough to dial it or doing mental arithmetic.","Keep the answer focused on the question and avoid discussing long-term memories unless contrasting them clearly with working memory."],
+      summary:"The response names a relevant model, but major confusion with long-term memory weakens accuracy. The priority is to define working memory as temporary active processing."
+    },
+    human: {
+      Clarity:"The terminology used is mostly appropriate to the prompt and the sentence structure is good. However, some sentences communicate ideas that are not important or don’t relate to the prompt e.g. ‘In real life it is enough to know that working memory is what helps you remember things for a long time’. This sentence is vague and doesn’t provide any insight to the topic at hand. Opinions/ambiguous commentary should also be avoided, such as ‘This shows that memory is not perfect, but it is still reliable enough’.",
+      Flow:"There is good flow throughout the response and a logical progression of ideas. The TEEL paragraph structure is mostly followed to good effect.",
+      Accuracy:"Response shows a poor understanding of working memory by frequently attributing characteristics to it that belong to long-term memory. For example, recalling the date of a war demonstrates long-term memory of a semantic fact, not working memory. Working memory is in the order of 2–3 seconds unless information is actively rehearsed, and precedes encoding into long-term memory; it is processing in the here and now, allowing for information to be operated on and processed in real-time. Forgetting appointments and birthdays then is not a failure of working memory, but long-term memory. Because of this misconception, no accurate real-world example of how working memory operates in everyday cognition is provided. As well, there is a misconception that working memory lasts longer than short-term memory.",
+      Depth:"Most elements of Baddeley and Hitch’s model are given but they are not described in any detail and the episodic buffer is missing. Needed to explain the process of the central executive directing attention and the slave systems storing different types of information. It might have been helpful to describe a study that supported the model, e.g. phonological similarity effect, in order to illustrate the capacity limits of the slave systems.",
+      improve:["Correctly discriminate between working and long-term memory","Describe the components of Baddeley and Hitch’s model","Detail the capacity limits of working memory","Avoid opinions/ambiguous phrasing"],
+      summary:"The most important strength of the response was that it mentioned Baddeley and Hitch’s working memory model, along with most of its components. The most critical weakness was that it frequently confounded working memory with long-term memory. The key priority for improvement then would be describing working memory in a way that divorces it from long-term memory by mentioning its timeframe, capacity and applications."
+    }
+  }
+};
+
+/* screen 1 */
+document.getElementById('wm-q').textContent = WM.q;
+const paras=document.querySelector('#wm-answer .paras');
+WM.answer.forEach(t=>{const p=document.createElement('p'); p.textContent=t; paras.appendChild(p);});
+const more=document.getElementById('wm-more'), abox=document.getElementById('wm-answer');
+more.addEventListener('click',()=>{
+  const open=abox.classList.toggle('clamp')===false;
+  more.textContent=open?'Show less':'Read the full answer'; more.setAttribute('aria-expanded',open);
+});
+
+/* screen 2: random A/B order each visit */
+const ORDER = Math.random()<.5 ? ['ai','human'] : ['human','ai'];
+const panel=document.getElementById('fb-panel'); let current=0, revealed=false;
+function showFb(i){
+  current=i;
+  [0,1].forEach(k=>document.getElementById('tab-'+k).setAttribute('aria-selected', k===i));
+  const src=ORDER[i], f=WM.feedback[src];
+  panel.className='fbp'+(revealed?' revealed':'');
+  panel.innerHTML='';
+  const who=document.createElement('div'); who.className='who';
+  who.style.background = src==='ai' ? '#D6337F' : '#3F1467';
+  who.textContent = src==='ai' ? 'Generated by AI' : 'Written by a UQ tutor';
+  panel.appendChild(who);
+  ['Clarity','Flow','Accuracy','Depth'].forEach(k=>{
+    const d=document.createElement('div'); d.className='crit';
+    d.innerHTML='<b></b><p></p>'; d.querySelector('b').textContent=k; d.querySelector('p').textContent=f[k];
+    panel.appendChild(d);
+  });
+  const h=document.createElement('div'); h.className='crit'; h.innerHTML='<b>How to improve for next time</b><ol></ol>';
+  f.improve.forEach(t=>{const li=document.createElement('li'); li.textContent=t; h.querySelector('ol').appendChild(li);});
+  panel.appendChild(h);
+  const sm=document.createElement('div'); sm.className='sum'; sm.innerHTML='<span class="mini">Summary</span><span></span>';
+  sm.querySelector('span:last-child').textContent=f.summary; panel.appendChild(sm);
+}
+[0,1].forEach(k=>document.getElementById('tab-'+k).addEventListener('click',()=>showFb(k)));
+const fbMore=document.getElementById('fb-more'), fbWrap=document.getElementById('fb-wrap');
+fbMore.addEventListener('click',()=>{
+  const open=fbWrap.classList.toggle('clamp')===false;
+  fbMore.textContent=open?'Show less':'Read the full feedback'; fbMore.setAttribute('aria-expanded',open);
+});
+showFb(0);
+
+/* screen 4: sliders, attitude items shuffled */
+const FIRST=[["How confident are you in the quality of your written response?","Not confident at all","Extremely confident"],
+             ["How difficult was the writing task to complete?","Very easy (not difficult)","Very difficult"]];
+const ATT=[["How useful and helpful was the feedback you received?","Not helpful at all","Extremely helpful"],
+           ["How clear and readable was the feedback?","Very difficult to read","Very easy to read"],
+           ["How would you rate the tone and style of the feedback?","Very poor tone","Excellent tone"],
+           ["How memorable and impactful was the feedback?","Not memorable at all","Highly memorable"]];
+for(let i=ATT.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ATT[i],ATT[j]]=[ATT[j],ATT[i]];}
+const sw=document.getElementById('sliders');
+[...FIRST,...ATT].forEach((it,idx)=>{
+  const d=document.createElement('div'); d.className='sl'+(idx===2?' group-gap':'');
+  const id='sl'+idx;
+  d.innerHTML=`<label for="${id}"></label><div class="row"><input type="range" id="${id}" min="0" max="100" value="0"><output for="${id}">0</output></div><div class="ends"><span></span><span></span></div>`;
+  d.querySelector('label').textContent=it[0];
+  d.querySelectorAll('.ends span')[0].textContent=it[1]; d.querySelectorAll('.ends span')[1].textContent=it[2];
+  const r=d.querySelector('input'), o=d.querySelector('output'); r.addEventListener('input',()=>o.textContent=r.value);
+  sw.appendChild(d);
+});
+
+/* screen 5: judgement */
+const opts=document.querySelectorAll('#opts .opt'), res=document.getElementById('judge-result');
+opts.forEach(b=>b.addEventListener('click',()=>{
+  opts.forEach(x=>x.setAttribute('aria-pressed', x===b));
+  const truth=ORDER[0], a=b.dataset.a;
+  revealed=true; showFb(current);
+  const label = truth==='ai' ? 'generated by AI' : 'written by a UQ tutor';
+  if(a==='unsure') res.innerHTML=`<span style="color:#3F1467">Feedback A was ${label}. 17.5% of participants' judgements were "not sure" too.</span>`;
+  else if(a===truth) res.innerHTML=`<span style="color:#3F1467">Correct: Feedback A was ${label}. Fewer than half of participants' judgements were right.</span>`;
+  else res.innerHTML=`<span style="color:#D6337F">Not quite: Feedback A was ${label}. You're in good company, as 33.1% of participants' judgements were wrong.</span>`;
+  res.insertAdjacentHTML('beforeend','<br><span class="small muted" style="font-weight:400">Both feedback tabs now show their source.</span>');
+}));
+
+/* ---------- forest plots ---------- */
+const DIMS=["Helpfulness","Clarity","Tone and style","Memorability and impact"];
+const BELIEVED=[[3.72,-1.17,8.61,.135],[6.03,1.90,10.16,.013],[6.28,1.85,10.70,.013],[7.22,2.94,11.50,.004]];
+const ACTUAL=[[-12.54,-16.24,-8.83,.001],[-6.50,-10.08,-2.93,.001],[-7.23,-11.01,-3.44,.001],[-8.78,-12.34,-5.21,.001]];
+function fmt(v){return (v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(1)}
+function pfmt(p){return p<=.001?'p < .001':'p = '+p.toFixed(3).replace(/^0/,'')}
+function forest(el,data,color){
+  const W=Math.max(300,Math.round(el.clientWidth)), narrow=W<480, rowH=narrow?52:60, top=22, bottom=56, left=narrow?104:150, right=12, H=top+rowH*DIMS.length+bottom, fs=narrow?13:15;
+  const x0=-20,x1=15,sx=v=>left+(v-x0)/(x1-x0)*(W-left-right);
+  let s=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Dot plot of rating differences with confidence intervals">`;
+  for(let t=-20;t<=15;t+=5){
+    const x=sx(t);
+    s+=`<line x1="${x}" x2="${x}" y1="${top-6}" y2="${top+rowH*DIMS.length}" stroke="${t===0?'#9A93A3':'#EEEAF2'}" stroke-width="${t===0?1.5:1}" ${t===0?'stroke-dasharray="4 4"':''}/>`;
+    if(!narrow || t%10===0 || t===15) s+=`<text x="${x}" y="${top+rowH*DIMS.length+20}" text-anchor="middle" font-size="${fs}" fill="#7A7482">${t>0?'+'+t:t<0?'−'+(-t):0}</text>`;
+  }
+  const ay=top+rowH*DIMS.length+46;
+  s+=`<text x="${sx(0)-10}" y="${ay}" text-anchor="end" font-size="${fs}" fill="#55505C">◀ AI higher</text>`;
+  s+=`<text x="${sx(0)+10}" y="${ay}" text-anchor="start" font-size="${fs}" fill="#55505C">Human higher ▶</text>`;
+  data.forEach((d,i)=>{
+    const [est,lo,hi,p]=d, y=top+rowH*i+rowH/2, sig=p<.05;
+    const label=narrow?["Helpfulness","Clarity","Tone/style","Memorability"][i]:DIMS[i].replace('Memorability and impact','Memorability');
+    s+=`<text x="${left-14}" y="${y+5}" text-anchor="end" font-size="${fs+1}" font-weight="700" fill="#1F1A24">${label}</text>`;
+    s+=`<line x1="${sx(lo)}" x2="${sx(hi)}" y1="${y}" y2="${y}" stroke="${color}" stroke-width="3" stroke-linecap="round"/>`;
+    s+=`<circle cx="${sx(est)}" cy="${y}" r="8" fill="${sig?color:'#fff'}" stroke="${sig?'#fff':color}" stroke-width="${sig?2:3}"/>`;
+    s+=`<text x="${sx(est)}" y="${y-14}" text-anchor="middle" font-size="${fs}" font-weight="700" fill="#1F1A24">${fmt(est)}</text>`;
+    s+=`<rect class="hit" data-i="${i}" x="${left}" y="${y-rowH/2}" width="${W-left-right}" height="${rowH}" fill="transparent" style="cursor:pointer"/>`;
+  });
+  s+='</svg><div class="tip" role="status"></div>';
+  el.innerHTML=s;
+  const tip=el.querySelector('.tip'), svg=el.querySelector('svg');
+  function show(i){
+    const [est,lo,hi,p]=data[i]; const r=svg.getBoundingClientRect(), sc=1;
+    tip.innerHTML=`<b>${DIMS[i]}</b><br>${fmt(est)} points [${fmt(lo)}, ${fmt(hi)}]<br>Holm ${pfmt(p)}`;
+    tip.style.left=Math.min(Math.max(sx(est)*sc,90),r.width-90)+'px';
+    tip.style.top=(top+rowH*i+rowH/2-12)*sc+'px'; tip.classList.add('on');
+  }
+  el.querySelectorAll('.hit').forEach(h=>{
+    h.addEventListener('mouseenter',()=>show(+h.dataset.i));
+    h.addEventListener('click',()=>show(+h.dataset.i));
+    h.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+  });
+}
+function drawCharts(){
+  forest(document.getElementById('chart-believed'),BELIEVED,'#3F1467');
+  forest(document.getElementById('chart-actual'),ACTUAL,'#D6337F');
+}
+drawCharts();
+let rz; let lastW=window.innerWidth;
+window.addEventListener('resize',()=>{ if(window.innerWidth===lastW) return; lastW=window.innerWidth; clearTimeout(rz); rz=setTimeout(drawCharts,150); });
+
+/* estimates table (table view of both charts) */
+document.getElementById('est-table').innerHTML = DIMS.map((d,i)=>{
+  const b=BELIEVED[i], a=ACTUAL[i];
+  return `<tr><td>${d}</td><td>${fmt(b[0])} [${fmt(b[1])}, ${fmt(b[2])}]</td><td>${fmt(a[0])} [${fmt(a[1])}, ${fmt(a[2])}]</td></tr>`;
+}).join('');
+</script>
+</body>
+</html>
